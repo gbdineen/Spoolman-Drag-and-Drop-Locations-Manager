@@ -1,0 +1,514 @@
+{
+  "location": [
+    {
+      "id": 1,
+      "name": "Main Storage"
+    },
+    {
+      "id": 2,
+      "name": "Workshop"
+    },
+    {
+      "id": 3,
+      "name": "Printing Room"
+    },
+    {
+      "id": 4,
+      "name": "Prototype Lab"
+    },
+    {
+      "id": 5,
+      "name": "Research Area"
+    },
+    {
+      "id": 6,
+      "name": "Equipment Room"
+    },
+    {
+      "id": 7,
+      "name": "Storage Closet"
+    },
+    {
+      "id": 8,
+      "name": "Maintenance Bay"
+    }
+  ],
+  "spool": [
+    {
+      "id": 1,
+      "registered": "2023-01-15",
+      "first_used": "2023-02-01",
+      "last_used": "2023-06-10",
+      "filament": {
+        "id": 101,
+        "name": "PLA Pro",
+        "vendor": {
+          "name": "3D Printing Solutions",
+          "country": "USA"
+        },
+        "material": "PLA",
+        "color_hex": "#FF0000",
+        "weight": 1000
+      },
+      "remaining_weight": 350,
+      "used_weight": 650,
+      "remaining_length": 120,
+      "used_length": 380,
+      "location": "Workshop",
+      "lot_nr": "PLA-PRO-2023-001",
+      "comment": "High-quality red PLA filament",
+      "archived": false
+    },
+    {
+      "id": 2,
+      "registered": "2023-02-20",
+      "first_used": "2023-03-05",
+      "last_used": "2023-05-22",
+      "filament": {
+        "id": 102,
+        "name": "PETG Clear",
+        "vendor": {
+          "name": "Filament World",
+          "country": "Germany"
+        },
+        "material": "PETG",
+        "color_hex": "#00FF00",
+        "weight": 750
+      },
+      "remaining_weight": 200,
+      "used_weight": 550,
+      "remaining_length": 80,
+      "used_length": 270,
+      "location": "Printing Room",
+      "lot_nr": "PETG-CLR-2023-002",
+      "comment": "Transparent PETG for prototyping",
+      "archived": false
+    },
+    {
+      "id": 3,
+      "registered": "2023-03-10",
+      "first_used": null,
+      "last_used": null,
+      "filament": {
+        "id": 103,
+        "name": "ABS Black",
+        "vendor": null,
+        "material": "ABS",
+        "color_hex": "#000000",
+        "weight": 1200
+      },
+      "remaining_weight": 1200,
+      "used_weight": 0,
+      "remaining_length": null,
+      "used_length": null,
+      "location": "Main Storage",
+      "lot_nr": null,
+      "comment": "New spool, not yet used",
+      "archived": false
+    },
+    {
+      "id": 4,
+      "registered": "2023-04-05",
+      "first_used": "2023-04-15",
+      "last_used": "2023-06-30",
+      "filament": {
+        "id": 104,
+        "name": "TPU Flexible",
+        "vendor": {
+          "name": "Elastic Prints",
+          "country": "Japan"
+        },
+        "material": "TPU",
+        "color_hex": "#0000FF",
+        "weight": 500
+      },
+      "remaining_weight": 150,
+      "used_weight": 350,
+      "remaining_length": 50,
+      "used_length": 200,
+      "location": "Research Area",
+      "lot_nr": "TPU-FLX-2023-003",
+      "comment": "Flexible filament for soft prototypes",
+      "archived": false
+    },
+    {
+      "id": 5,
+      "registered": "2023-05-01",
+      "first_used": "2023-05-10",
+      "last_used": "2023-07-15",
+      "filament": {
+        "id": 105,
+        "name": "Wood PLA",
+        "vendor": {
+          "name": "Natural Prints",
+          "country": "Canada"
+        },
+        "material": "PLA",
+        "color_hex": "#8B4513",
+        "weight": 800
+      },
+      "remaining_weight": 400,
+      "used_weight": 400,
+      "remaining_length": 150,
+      "used_length": 250,
+      "location": "Equipment Room",
+      "lot_nr": "PLA-WOD-2023-004",
+      "comment": "Wood-infused PLA for textured prints",
+      "archived": false
+    },
+    {
+      "id": 6,
+      "registered": "2023-05-20",
+      "first_used": null,
+      "last_used": null,
+      "filament": {
+        "id": 106,
+        "name": "HIPS Support",
+        "vendor": null,
+        "material": "HIPS",
+        "color_hex": "#808080",
+        "weight": 600
+      },
+      "remaining_weight": 600,
+      "used_weight": 0,
+      "remaining_length": null,
+      "used_length": null,
+      "location": "Storage Closet",
+      "lot_nr": null,
+      "comment": "Support material, not yet used",
+      "archived": false
+    },
+    {
+      "id": 7,
+      "registered": "2023-06-10",
+      "first_used": "2023-06-20",
+      "last_used": "2023-07-05",
+      "filament": {
+        "id": 107,
+        "name": "PC Polycarbonate",
+        "vendor": {
+          "name": "Industrial Prints",
+          "country": "Switzerland"
+        },
+        "material": "PC",
+        "color_hex": "#C0C0C0",
+        "weight": 700
+      },
+      "remaining_weight": 300,
+      "used_weight": 400,
+      "remaining_length": 100,
+      "used_length": 250,
+      "location": "Prototype Lab",
+      "lot_nr": "PC-IND-2023-005",
+      "comment": "High-strength polycarbonate filament",
+      "archived": false
+    },
+    {
+      "id": 8,
+      "registered": "2023-06-25",
+      "first_used": "2023-07-01",
+      "last_used": "2023-07-20",
+      "filament": {
+        "id": 108,
+        "name": "ASA Outdoor",
+        "vendor": {
+          "name": "Weatherproof Prints",
+          "country": "Netherlands"
+        },
+        "material": "ASA",
+        "color_hex": "#FFFF00",
+        "weight": 900
+      },
+      "remaining_weight": 600,
+      "used_weight": 300,
+      "remaining_length": 200,
+      "used_length": 150,
+      "location": "Maintenance Bay",
+      "lot_nr": "ASA-WTR-2023-006",
+      "comment": "UV-resistant ASA for outdoor applications",
+      "archived": false
+    },
+    {
+      "id": 9,
+      "registered": "2023-07-05",
+      "first_used": null,
+      "last_used": null,
+      "filament": {
+        "id": 109,
+        "name": "Nylon Carbon Fiber",
+        "vendor": null,
+        "material": "Nylon",
+        "color_hex": "#404040",
+        "weight": 500
+      },
+      "remaining_weight": 500,
+      "used_weight": 0,
+      "remaining_length": null,
+      "used_length": null,
+      "location": "Main Storage",
+      "lot_nr": null,
+      "comment": "Carbon fiber reinforced nylon",
+      "archived": false
+    },
+    {
+      "id": 10,
+      "registered": "2023-07-15",
+      "first_used": "2023-07-22",
+      "last_used": "2023-08-10",
+      "filament": {
+        "id": 110,
+        "name": "PVA Soluble",
+        "vendor": {
+          "name": "Support Specialists",
+          "country": "UK"
+        },
+        "material": "PVA",
+        "color_hex": "#FFFFFF",
+        "weight": 400
+      },
+      "remaining_weight": 200,
+      "used_weight": 200,
+      "remaining_length": 80,
+      "used_length": 120,
+      "location": "Workshop",
+      "lot_nr": "PVA-SUP-2023-007",
+      "comment": "Water-soluble support material",
+      "archived": false
+    },
+    {
+      "id": 11,
+      "registered": "2023-08-01",
+      "first_used": null,
+      "last_used": null,
+      "filament": {
+        "id": 111,
+        "name": "PEEK High Temp",
+        "vendor": null,
+        "material": "PEEK",
+        "color_hex": "#A52A2A",
+        "weight": 250
+      },
+      "remaining_weight": 250,
+      "used_weight": 0,
+      "remaining_length": null,
+      "used_length": null,
+      "location": "Research Area",
+      "lot_nr": null,
+      "comment": "High-temperature engineering plastic",
+      "archived": false
+    },
+    {
+      "id": 12,
+      "registered": "2023-08-15",
+      "first_used": "2023-08-25",
+      "last_used": "2023-09-05",
+      "filament": {
+        "id": 112,
+        "name": "PMMA Clear",
+        "vendor": {
+          "name": "Transparent Solutions",
+          "country": "France"
+        },
+        "material": "PMMA",
+        "color_hex": "#87CEEB",
+        "weight": 600
+      },
+      "remaining_weight": 350,
+      "used_weight": 250,
+      "remaining_length": 120,
+      "used_length": 180,
+      "location": "Printing Room",
+      "lot_nr": "PMMA-CLR-2023-008",
+      "comment": "Acrylic-like transparent filament",
+      "archived": false
+    },
+    {
+      "id": 13,
+      "registered": "2023-09-01",
+      "first_used": null,
+      "last_used": null,
+      "filament": {
+        "id": 113,
+        "name": "PA6 Glass Fiber",
+        "vendor": null,
+        "material": "PA6",
+        "color_hex": "#696969",
+        "weight": 450
+      },
+      "remaining_weight": 450,
+      "used_weight": 0,
+      "remaining_length": null,
+      "used_length": null,
+      "location": "Equipment Room",
+      "lot_nr": null,
+      "comment": "Glass fiber reinforced polyamide",
+      "archived": false
+    },
+    {
+      "id": 14,
+      "registered": "2023-09-15",
+      "first_used": "2023-09-25",
+      "last_used": "2023-10-10",
+      "filament": {
+        "id": 114,
+        "name": "PP Tough",
+        "vendor": {
+          "name": "Durable Prints",
+          "country": "Italy"
+        },
+        "material": "PP",
+        "color_hex": "#FFA500",
+        "weight": 550
+      },
+      "remaining_weight": 250,
+      "used_weight": 300,
+      "remaining_length": 100,
+      "used_length": 200,
+      "location": "Prototype Lab",
+      "lot_nr": "PP-DUR-2023-009",
+      "comment": "High-impact polypropylene",
+      "archived": false
+    },
+    {
+      "id": 15,
+      "registered": "2023-10-01",
+      "first_used": null,
+      "last_used": null,
+      "filament": {
+        "id": 115,
+        "name": "PC-ABS Blend",
+        "vendor": null,
+        "material": "PC-ABS",
+        "color_hex": "#4B0082",
+        "weight": 700
+      },
+      "remaining_weight": 700,
+      "used_weight": 0,
+      "remaining_length": null,
+      "used_length": null,
+      "location": "Storage Closet",
+      "lot_nr": null,
+      "comment": "Polycarbonate-ABS blend for tough prints",
+      "archived": false
+    },
+    {
+      "id": 16,
+      "registered": "2023-10-15",
+      "first_used": "2023-10-25",
+      "last_used": "2023-11-05",
+      "filament": {
+        "id": 116,
+        "name": "TPE Soft",
+        "vendor": {
+          "name": "Flexible Technologies",
+          "country": "Spain"
+        },
+        "material": "TPE",
+        "color_hex": "#FF69B4",
+        "weight": 400
+      },
+      "remaining_weight": 150,
+      "used_weight": 250,
+      "remaining_length": 60,
+      "used_length": 190,
+      "location": "Maintenance Bay",
+      "lot_nr": "TPE-FLX-2023-010",
+      "comment": "Ultra-soft thermoplastic elastomer",
+      "archived": false
+    },
+    {
+      "id": 17,
+      "registered": "2023-11-01",
+      "first_used": null,
+      "last_used": null,
+      "filament": {
+        "id": 117,
+        "name": "ULTEM High Performance",
+        "vendor": null,
+        "material": "ULTEM",
+        "color_hex": "#DAA520",
+        "weight": 300
+      },
+      "remaining_weight": 300,
+      "used_weight": 0,
+      "remaining_length": null,
+      "used_length": null,
+      "location": "Research Area",
+      "lot_nr": null,
+      "comment": "High-performance polyetherimide",
+      "archived": false
+    },
+    {
+      "id": 18,
+      "registered": "2023-11-15",
+      "first_used": "2023-11-25",
+      "last_used": "2023-12-10",
+      "filament": {
+        "id": 118,
+        "name": "Conductive PLA",
+        "vendor": {
+          "name": "Electronic Prints",
+          "country": "South Korea"
+        },
+        "material": "PLA",
+        "color_hex": "#32CD32",
+        "weight": 250
+      },
+      "remaining_weight": 100,
+      "used_weight": 150,
+      "remaining_length": 40,
+      "used_length": 110,
+      "location": "Workshop",
+      "lot_nr": "PLA-CON-2023-011",
+      "comment": "Electrically conductive PLA",
+      "archived": false
+    },
+    {
+      "id": 19,
+      "registered": "2023-12-01",
+      "first_used": null,
+      "last_used": null,
+      "filament": {
+        "id": 119,
+        "name": "PI High Temp",
+        "vendor": null,
+        "material": "PI",
+        "color_hex": "#8B0000",
+        "weight": 200
+      },
+      "remaining_weight": 200,
+      "used_weight": 0,
+      "remaining_length": null,
+      "used_length": null,
+      "location": "Equipment Room",
+      "lot_nr": null,
+      "comment": "Polyimide for extreme temperature applications",
+      "archived": false
+    },
+    {
+      "id": 20,
+      "registered": "2023-12-15",
+      "first_used": "2023-12-25",
+      "last_used": "2024-01-10",
+      "filament": {
+        "id": 120,
+        "name": "Carbon Fiber Nylon",
+        "vendor": {
+          "name": "Advanced Materials",
+          "country": "USA"
+        },
+        "material": "Nylon",
+        "color_hex": "#708090",
+        "weight": 500
+      },
+      "remaining_weight": 250,
+      "used_weight": 250,
+      "remaining_length": 100,
+      "used_length": 150,
+      "location": "Prototype Lab",
+      "lot_nr": "NYL-CRB-2023-012",
+      "comment": "High-strength carbon fiber reinforced nylon",
+      "archived": false
+    }
+  ]
+}
