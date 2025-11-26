@@ -365,23 +365,83 @@ export const LocationsPage = () => {
     const { active, over } = event;
     setActiveId(null);
 
-    if (!over) return;
+    console.log("[DragEnd] 🎯 Drag ended:", {
+      activeId: active.id,
+      overId: over?.id,
+      hasOver: !!over,
+      overData: over?.data,
+    });
+
+    if (!over) {
+      console.log("[DragEnd] ❌ No drop target detected");
+      return;
+    }
 
     const spoolId = active.id as number;
     const overId = over.id;
 
     // Find the spool being dragged
     const draggedSpool = spools.find((s) => s.id === spoolId);
-    if (!draggedSpool) return;
-
-    // Check if dragging over another spool (reordering within same location)
-    const overSpool = spools.find((s) => s.id === overId);
-
-    if (overSpool && draggedSpool.location === overSpool.location && draggedSpool.location) {
-      // This is a reorder within the same location - already handled in handleDragOver
-      // The debounced save has been triggered
+    if (!draggedSpool) {
+      console.log("[DragEnd] ❌ Dragged spool not found:", spoolId);
       return;
     }
+
+    console.log("[DragEnd] 📦 Dragged spool:", {
+      spoolId,
+      currentLocation: draggedSpool.location,
+    });
+
+    // Check if dragging over another spool
+    const overSpool = spools.find((s) => s.id === overId);
+
+    console.log("[DragEnd] 🎲 Over target:", {
+      overId,
+      overIdType: typeof overId,
+      overIsSpool: !!overSpool,
+      overSpoolLocation: overSpool?.location,
+      draggedSpoolLocation: draggedSpool.location,
+    });
+
+    // Determine target location
+    let targetLocation: string | null = null;
+
+    if (overSpool) {
+      // Dropped on another spool
+      if (draggedSpool.location === overSpool.location && draggedSpool.location) {
+        // Same location reorder - already handled in handleDragOver
+        console.log("[DragEnd] ↔️  Reorder within same location - skipping");
+        return;
+      }
+      // Different location - use the over spool's location
+      targetLocation = overSpool.location;
+      console.log("[DragEnd] 🎯 Dropping on spool in location:", targetLocation || "unassigned");
+    } else {
+      // Dropped on a droppable zone
+      const dropZoneId = overId as string;
+
+      if (dropZoneId === "unassigned") {
+        targetLocation = null;
+        console.log("[DragEnd] 📭 Dropping on unassigned zone");
+      } else if (dropZoneId.startsWith("location-")) {
+        targetLocation = dropZoneId.replace("location-", "");
+        console.log("[DragEnd] 📍 Dropping on location zone:", targetLocation);
+      } else {
+        console.log("[DragEnd] ⚠️  Unknown drop zone:", dropZoneId);
+        return;
+      }
+    }
+
+    // Check if location actually changed
+    if (draggedSpool.location === targetLocation) {
+      console.log("[DragEnd] ⏸️  Location unchanged - no update needed");
+      return;
+    }
+
+    console.log("[DragEnd] 🔄 Processing location change:", {
+      from: draggedSpool.location || "unassigned",
+      to: targetLocation || "unassigned",
+    });
 
     // Save current state for rollback
     const previousLocation = draggedSpool.location;
@@ -391,88 +451,34 @@ export const LocationsPage = () => {
       location: previousLocation,
     };
 
-    // Handle moving to a different location
-    // FIX: If dropping on a spool in a different location, extract location from overSpool
-    let targetLocationName: string;
+    // Update local order state
+    setLocalSpoolOrder((prev) => {
+      const updated = { ...prev };
 
-    if (overSpool && overSpool.location !== draggedSpool.location) {
-      // Dropping on a spool in a different location
-      targetLocationName = overSpool.location || "unassigned";
-    } else {
-      // Dropping on a location's droppable zone
-      targetLocationName = overId as string;
-    }
-
-    // Determine new location value
-    let newLocation: string | null = null;
-
-    if (targetLocationName === "unassigned") {
-      newLocation = null;
-      // Remove from local order when moving to unassigned
-      if (draggedSpool.location) {
-        setLocalSpoolOrder((prev) => {
-          const updated = { ...prev };
-          if (updated[draggedSpool.location!]) {
-            updated[draggedSpool.location!] = updated[draggedSpool.location!].filter((id) => id !== spoolId);
-          }
-          return updated;
-        });
+      // Remove from old location
+      if (draggedSpool.location && updated[draggedSpool.location]) {
+        updated[draggedSpool.location] = updated[draggedSpool.location].filter((id) => id !== spoolId);
+        console.log("[DragEnd] ➖ Removed from old location:", draggedSpool.location);
       }
-    } else if (targetLocationName.startsWith("location-")) {
-      // Extract location name from the droppable ID
-      const locationName = targetLocationName.replace("location-", "");
-      newLocation = locationName;
 
-      // Add to local order of new location
-      setLocalSpoolOrder((prev) => {
-        const updated = { ...prev };
-
-        // Remove from old location if exists
-        if (draggedSpool.location && updated[draggedSpool.location]) {
-          updated[draggedSpool.location] = updated[draggedSpool.location].filter((id) => id !== spoolId);
-        }
-
-        // Add to new location
-        if (!updated[locationName]) {
-          const existingSpools = spoolsByLocation[locationName] || [];
-          updated[locationName] = [...existingSpools.map((s) => s.id), spoolId];
+      // Add to new location
+      if (targetLocation) {
+        if (!updated[targetLocation]) {
+          const existingSpools = spoolsByLocation[targetLocation] || [];
+          updated[targetLocation] = [...existingSpools.map((s) => s.id), spoolId];
         } else {
-          updated[locationName] = [...updated[locationName], spoolId];
+          updated[targetLocation] = [...updated[targetLocation], spoolId];
         }
+        console.log("[DragEnd] ➕ Added to new location:", targetLocation, updated[targetLocation]);
+      } else {
+        console.log("[DragEnd] ➕ Moved to unassigned");
+      }
 
-        return updated;
-      });
-    } else {
-      // FIX: Handle case where targetLocationName is the actual location name (from overSpool)
-      // This happens when dropping on a spool in a different location
-      newLocation = targetLocationName;
+      return updated;
+    });
 
-      // Add to local order of new location
-      setLocalSpoolOrder((prev) => {
-        const updated = { ...prev };
-
-        // Remove from old location if exists
-        if (draggedSpool.location && updated[draggedSpool.location]) {
-          updated[draggedSpool.location] = updated[draggedSpool.location].filter((id) => id !== spoolId);
-        }
-
-        // Add to new location
-        if (!updated[newLocation!]) {
-          const existingSpools = spoolsByLocation[newLocation!] || [];
-          updated[newLocation!] = [...existingSpools.map((s) => s.id), spoolId];
-        } else {
-          updated[newLocation!] = [...updated[newLocation!], spoolId];
-        }
-
-        return updated;
-      });
-    }
-
-    // Only update if location changed
-    if (draggedSpool.location !== newLocation) {
-      // Use debounced update to prevent API overload
-      debouncedUpdateSpool(spoolId, newLocation, previousLocation, localOrderSnapshot);
-    }
+    // Trigger API update with debouncing
+    debouncedUpdateSpool(spoolId, targetLocation, previousLocation, localOrderSnapshot);
   };
 
   const activeSpool = spools.find((s) => s.id === activeId);
@@ -598,6 +604,8 @@ const DropZone = ({ id, spools }: DropZoneProps) => {
     id,
   });
 
+  const spoolIds = spools.map((s) => s.id);
+
   return (
     <Card
       ref={setNodeRef}
@@ -625,38 +633,18 @@ const DropZone = ({ id, spools }: DropZoneProps) => {
             <Typography color="text.secondary">{isOver ? "Drop here" : "No unassigned spools"}</Typography>
           </Box>
         ) : (
-          <Grid container spacing={2}>
-            {spools.map((spool) => (
-              <Grid item xs={12} sm={6} md={4} lg={3} key={spool.id}>
-                <DraggableSpoolCard spool={spool} />
-              </Grid>
-            ))}
-          </Grid>
+          <SortableContext items={spoolIds} strategy={verticalListSortingStrategy}>
+            <Grid container spacing={2}>
+              {spools.map((spool) => (
+                <Grid item xs={12} sm={6} md={4} lg={3} key={spool.id}>
+                  <SortableSpoolCard spool={spool} />
+                </Grid>
+              ))}
+            </Grid>
+          </SortableContext>
         )}
       </CardContent>
     </Card>
-  );
-};
-
-interface DraggableSpoolCardProps {
-  spool: Spool;
-}
-
-const DraggableSpoolCard = ({ spool }: DraggableSpoolCardProps) => {
-  const { attributes, listeners, setNodeRef, transform, isDragging } = useDraggable({
-    id: spool.id,
-  });
-
-  const style = transform
-    ? {
-        transform: `translate3d(${transform.x}px, ${transform.y}px, 0)`,
-      }
-    : undefined;
-
-  return (
-    <div ref={setNodeRef} style={style} {...listeners} {...attributes}>
-      <SpoolCard spool={spool} draggable isDragging={isDragging} />
-    </div>
   );
 };
 
