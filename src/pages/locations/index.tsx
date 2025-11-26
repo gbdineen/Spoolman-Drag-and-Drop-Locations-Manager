@@ -392,7 +392,16 @@ export const LocationsPage = () => {
     };
 
     // Handle moving to a different location
-    const targetLocationName = overId as string;
+    // FIX: If dropping on a spool in a different location, extract location from overSpool
+    let targetLocationName: string;
+
+    if (overSpool && overSpool.location !== draggedSpool.location) {
+      // Dropping on a spool in a different location
+      targetLocationName = overSpool.location || "unassigned";
+    } else {
+      // Dropping on a location's droppable zone
+      targetLocationName = overId as string;
+    }
 
     // Determine new location value
     let newLocation: string | null = null;
@@ -429,6 +438,30 @@ export const LocationsPage = () => {
           updated[locationName] = [...existingSpools.map((s) => s.id), spoolId];
         } else {
           updated[locationName] = [...updated[locationName], spoolId];
+        }
+
+        return updated;
+      });
+    } else {
+      // FIX: Handle case where targetLocationName is the actual location name (from overSpool)
+      // This happens when dropping on a spool in a different location
+      newLocation = targetLocationName;
+
+      // Add to local order of new location
+      setLocalSpoolOrder((prev) => {
+        const updated = { ...prev };
+
+        // Remove from old location if exists
+        if (draggedSpool.location && updated[draggedSpool.location]) {
+          updated[draggedSpool.location] = updated[draggedSpool.location].filter((id) => id !== spoolId);
+        }
+
+        // Add to new location
+        if (!updated[newLocation!]) {
+          const existingSpools = spoolsByLocation[newLocation!] || [];
+          updated[newLocation!] = [...existingSpools.map((s) => s.id), spoolId];
+        } else {
+          updated[newLocation!] = [...updated[newLocation!], spoolId];
         }
 
         return updated;
@@ -657,6 +690,12 @@ interface SpoolCardProps {
 const SpoolCard = ({ spool, draggable = false, isDragging = false }: SpoolCardProps) => {
   const filament = spool.filament;
 
+  // Add null/undefined checks for spool properties
+  const remainingWeight = spool.remaining_weight ?? 0;
+  const totalWeight = filament?.weight ?? 0;
+  const remainingLength = spool.remaining_length ?? null;
+  const hasValidLength = remainingLength !== null && remainingLength !== undefined;
+
   return (
     <Card
       sx={{
@@ -680,13 +719,13 @@ const SpoolCard = ({ spool, draggable = false, isDragging = false }: SpoolCardPr
                 width: 24,
                 height: 24,
                 borderRadius: "50%",
-                backgroundColor: filament.color_hex,
+                backgroundColor: filament?.color_hex || "#cccccc",
                 border: "1px solid rgba(0,0,0,0.1)",
                 flexShrink: 0,
               }}
             />
             <Typography variant="subtitle2" fontWeight="bold" noWrap>
-              {filament.name}
+              {filament?.name || "Unknown Filament"}
             </Typography>
           </Box>
 
@@ -694,21 +733,21 @@ const SpoolCard = ({ spool, draggable = false, isDragging = false }: SpoolCardPr
             <strong>ID:</strong> #{spool.id}
           </Typography>
 
-          {filament.vendor && (
+          {filament?.vendor && (
             <Typography variant="body2" color="text.secondary" noWrap>
               <strong>Vendor:</strong> {filament.vendor.name}
             </Typography>
           )}
 
-          <Chip label={filament.material} size="small" sx={{ width: "fit-content" }} />
+          {filament?.material && <Chip label={filament.material} size="small" sx={{ width: "fit-content" }} />}
 
           <Typography variant="body2" color="text.secondary">
-            <strong>Weight:</strong> {spool.remaining_weight.toFixed(1)}g / {filament.weight}g
+            <strong>Weight:</strong> {remainingWeight.toFixed(1)}g / {totalWeight}g
           </Typography>
 
-          {spool.remaining_length !== null && (
+          {hasValidLength && (
             <Typography variant="body2" color="text.secondary">
-              <strong>Length:</strong> {(spool.remaining_length / 1000).toFixed(2)}m
+              <strong>Length:</strong> {(remainingLength / 1000).toFixed(2)}m
             </Typography>
           )}
         </Stack>

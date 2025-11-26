@@ -1,45 +1,45 @@
 packages:
-  - "/"
-# |===================================================|
-# | This project is set up with Refine v4            |
-# | To ensure usage of compatible versions           |
-# | We're defining dependency overrides here.         |
-# |===================================================|
+  - /
+
+onlyBuiltDependencies:
+  - better-sqlite3
+  - esbuild
+
 overrides:
-  "@refinedev/ably": "^4.1.10"
-  "@refinedev/airtable": "^4.4.13"
-  "@refinedev/antd": "^5.47.0"
-  "@refinedev/appwrite": "^7.0.1"
-  "@refinedev/chakra-ui": "^2.38.0"
-  "@refinedev/cli": "^2.16.47"
-  "@refinedev/core": "^4.58.0"
-  "@refinedev/devtools": "^1.2.17"
-  "@refinedev/devtools-internal": "^1.1.16"
-  "@refinedev/devtools-server": "^1.1.42"
-  "@refinedev/devtools-shared": "^1.1.14"
-  "@refinedev/devtools-ui": "^1.2.1"
-  "@refinedev/graphql": "^7.1.3"
-  "@refinedev/hasura": "^6.6.14"
-  "@refinedev/inferencer": "^5.1.1"
-  "@refinedev/kbar": "^1.3.17"
-  "@refinedev/mantine": "^2.37.0"
-  "@refinedev/mui": "^6.3.0"
-  "@refinedev/nestjs-query": "^1.3.5"
-  "@refinedev/nestjsx-crud": "^5.0.13"
-  "@refinedev/nextjs-router": "^6.2.3"
-  "@refinedev/react-hook-form": "^4.10.2"
-  "@refinedev/react-router": "^1.0.1"
-  "@refinedev/react-table": "^5.6.17"
-  "@refinedev/remix-router": "^3.0.8"
-  "@refinedev/simple-rest": "^5.0.11"
-  "@refinedev/strapi": "^4.1.15"
-  "@refinedev/strapi-v4": "^6.0.12"
-  "@refinedev/supabase": "^5.9.8"
-  "@refinedev/ui-tests": "^1.15.1"
-  "@refinedev/ui-types": "^1.24.2"
-  "react": "^18.0.0"
-  "react-dom": "^18.0.0"
-  "@types/react": "^18.0.0"
-  "@types/react-dom": "^18.0.0"
-  "@tanstack/react-query": "^4.10.1"
-  "@uiw/react-md-editor": "^4.0.7"
+  '@refinedev/ably': ^4.1.10
+  '@refinedev/airtable': ^4.4.13
+  '@refinedev/antd': ^5.47.0
+  '@refinedev/appwrite': ^7.0.1
+  '@refinedev/chakra-ui': ^2.38.0
+  '@refinedev/cli': ^2.16.47
+  '@refinedev/core': ^4.58.0
+  '@refinedev/devtools': ^1.2.17
+  '@refinedev/devtools-internal': ^1.1.16
+  '@refinedev/devtools-server': ^1.1.42
+  '@refinedev/devtools-shared': ^1.1.14
+  '@refinedev/devtools-ui': ^1.2.1
+  '@refinedev/graphql': ^7.1.3
+  '@refinedev/hasura': ^6.6.14
+  '@refinedev/inferencer': ^5.1.1
+  '@refinedev/kbar': ^1.3.17
+  '@refinedev/mantine': ^2.37.0
+  '@refinedev/mui': ^6.3.0
+  '@refinedev/nestjs-query': ^1.3.5
+  '@refinedev/nestjsx-crud': ^5.0.13
+  '@refinedev/nextjs-router': ^6.2.3
+  '@refinedev/react-hook-form': ^4.10.2
+  '@refinedev/react-router': ^1.0.1
+  '@refinedev/react-table': ^5.6.17
+  '@refinedev/remix-router': ^3.0.8
+  '@refinedev/simple-rest': ^5.0.11
+  '@refinedev/strapi': ^4.1.15
+  '@refinedev/strapi-v4': ^6.0.12
+  '@refinedev/supabase': ^5.9.8
+  '@refinedev/ui-tests': ^1.15.1
+  '@refinedev/ui-types': ^1.24.2
+  '@tanstack/react-query': ^4.10.1
+  '@types/react': ^18.0.0
+  '@types/react-dom': ^18.0.0
+  '@uiw/react-md-editor': ^4.0.7
+  react: ^18.0.0
+  react-dom: ^18.0.0
